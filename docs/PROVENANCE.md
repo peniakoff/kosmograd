@@ -27,6 +27,16 @@ Historical photographs and spacecraft drawings may be references without becomin
 
 Generated game bounds and previews listed in `.gitignore` are not sources. Blender, ModelViewer and image-editor outputs intended for release may be committed only with the provenance of their inputs recorded.
 
+## Legacy, unshipped source drafts
+
+The three files under `blender/legacy/p1-concepts/` were recovered from commit
+`a7c8cd5` authored by Tomasz Miller. They contain no linked bitmap textures and
+are retained only for geometry salvage. Exact modelling-tool assistance was
+not recorded on the historical branch, so these files are **not cleared for
+release**. Before derived geometry becomes canonical, confirm its authorship,
+record any AI or procedural assistance, and add the resulting asset-specific
+entry here.
+
 ## Release gate
 
 Before public Workshop visibility, every shipped binary and texture must have a provenance entry and no unresolved `unknown` license status.

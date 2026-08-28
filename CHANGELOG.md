@@ -11,3 +11,4 @@ Format: keep a human-readable list. Breaking save changes go in **bold** at the 
 - Marked `workshop/` as non-installable, added static prototype/release validation and narrowed the active object list.
 - Added reproducible test environments, three-cycle persistence checks, closed-beta criteria and asset provenance policy.
 - Added pull-request CI for prototype catalog validation.
+- Recovered three P1 Blender concept meshes from the legacy branch into a quarantined, non-release source area with audit and provenance notes; superseded documents, generated backups, renders and gated P3 models remain excluded.

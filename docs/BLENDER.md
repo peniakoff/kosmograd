@@ -72,6 +72,11 @@ blender/
 
 `.blend` is canonical. `export/` is generated. Workshop `.nmf` is generated from OBJ and is **not** edited by hand.
 
+Historical drafts under `blender/legacy/` are quarantined references, not
+canonical sources and not roadmap progress. Their local README records the
+gaps that must be resolved before any geometry is copied into
+`blender/assets/`.
+
 ## ModelViewer
 
 1. Import OBJ.
