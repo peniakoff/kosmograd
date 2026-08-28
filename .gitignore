@@ -1,0 +1,23 @@
+# Blender MCP ignore
+*.blend1
+*.blend2
+*.blend@
+__pycache__/
+.DS_Store
+Thumbs.db
+
+# WR:SR generated — never commit
+*.bbox
+*.bbox.bin
+bbox.bin
+*.fire
+preview.dds
+preview_side.dds
+
+# Local WIP copies
+workshop_wip/
+
+# OS / editors
+*.swp
+.idea/
+.vscode/

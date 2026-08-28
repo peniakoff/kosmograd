@@ -1,0 +1,15 @@
+Kosmograd: Sputnik
+
+A space-program logistics chain for Workers & Resources: Soviet Republic.
+
+This is chapter one of Kosmograd: fabricate Zarya-K1, haul it on a dedicated rail wagon, fuel the pad, and launch. Nothing teleports. University-educated workers are required. Rail curves must be gentle — the transporter-erector is long.
+
+Current workshop build may be grey-box (correct footprints, placeholder art). That is intentional.
+
+Requires a late-game industrial base: steel, aluminium, mechanical and electronic components, oil, chemicals, and a stable power grid.
+
+This mod does not edit vanilla files. It does not add a new resource type. Rockets and satellites are vehicles.
+
+Not affiliated with any historical design bureau. Names are original (Zarya, Vestnik). The subtitle "Sputnik" refers to the era of the first satellite, not a replica of a specific spacecraft.
+
+Tested game version: (fill in before publish)
