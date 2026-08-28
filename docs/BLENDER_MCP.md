@@ -64,7 +64,7 @@ Vanilla-adjacent, not portfolio-grade:
 
 ## Prompt blocks
 
-Every P1 asset already has a **Blender MCP prompt** at the end of its ASSETS.md section. Use that prompt verbatim as the first user message, then fix scale/origin if the bounding box report disagrees with the sheet by more than 0.1 m.
+Every catalog asset has a **Blender MCP prompt** at the end of its ASSETS.md section. Only the four P1-core prompts are authorized after the P0 `GO` decision. Use the relevant prompt as the first user message, then fix scale/origin if the bounding-box report disagrees with the sheet by more than 0.1 m.
 
 ## Failure handling
 

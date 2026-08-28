@@ -6,7 +6,7 @@ Ideas that must not leak into P1/P3 scheduling. If you are tempted, put a senten
 - Lunar lander / Bogatyr-L3
 - Booster reuse and refurbishment
 - Foreign contract board / AI space race
-- Failure-probability module (allowed later as a default-off toggle; not a parking-lot exile, just not P1)
+- Failure-probability module (out of scope for the v1 line)
 - Custom Glory resource and UI
 - Avionics as a new good
 - RP-K as a new good

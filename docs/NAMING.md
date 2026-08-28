@@ -32,13 +32,13 @@ A trademark / Workshop search runs before public 1.0 (checklist in [WORKSHOP.md]
 
 | Display `$NAME_STR` | Folder | Phase |
 |---|---|---|
-| "Kosmograd Rocket Factory" | `kosm_rocket_factory` | P1 |
-| "Kosmograd Satellite Factory" | `kosm_satellite_factory` | P1 |
-| "Kosmograd Assembly Center" | `kosm_assembly_center` | P1 |
-| "Kosmograd Fuel Refinery" | `kosm_fuel_refinery` | P1 |
-| "Kosmograd Launch Pad" | `kosm_launch_pad` | P1 |
-| "Kosmograd Memorial Plaza" | `kosm_memorial_plaza` | P3 / P1 hotfix |
-| "Kosmograd Rail Terminus" | `kosm_rail_terminus` | P3 / S2 fallback |
+| "Kosmograd Rocket Factory" | `kosm_rocket_factory` | P3 candidate |
+| "Kosmograd Satellite Factory" | `kosm_satellite_factory` | P3 candidate |
+| "Kosmograd Assembly Center" | `kosm_assembly_center` | P1 core |
+| "Kosmograd Fuel Refinery" | `kosm_fuel_refinery` | P3 candidate |
+| "Kosmograd Launch Pad" | `kosm_launch_pad` | P1 core |
+| "Kosmograd Memorial Plaza" | `kosm_memorial_plaza` | P4 / static reward candidate |
+| "Kosmograd Rail Terminus" | `kosm_rail_terminus` | P4 / S3 fallback candidate |
 | "Kosmograd Mission Control" | `kosm_mission_control` | P3 |
 | "Kosmograd Tracking Station" | `kosm_tracking_station` | P3 |
 | "Kosmograd Propellant Storage" | `kosm_propellant_storage` | P3 |

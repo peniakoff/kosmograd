@@ -15,6 +15,7 @@
 | [BLENDER_MCP.md](BLENDER_MCP.md) | AI-in-Blender contract |
 | [TESTING.md](TESTING.md) | Matrix and loop script |
 | [WORKSHOP.md](WORKSHOP.md) | Steam |
+| [PROVENANCE.md](PROVENANCE.md) | Source, license and AI-assistance records |
 | [AGENT.md](AGENT.md) | Short brief for any AI |
 | [PARKING.md](PARKING.md) | Out of scope |
 | [REFERENCES.md](REFERENCES.md) | Wiki and guides |

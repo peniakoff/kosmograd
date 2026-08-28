@@ -14,7 +14,7 @@ Every feature maps to one of these. If it does not, it is deferred or cut.
 
 1. **Vanilla-first aesthetic.** 1970s–80s panel construction, muted blue-grey metals, sparing red. No model outshines vanilla art. At 200 m it is the same republic, new district.
 2. **Real logistics.** Every component, every ton of propellant, every (later) cosmonaut is hauled by truck or train. Nothing teleports.
-3. **Prestige payoff.** Effort becomes loyalty, happiness, and — when the engine allows — money. A space program that only costs will be abandoned.
+3. **Honest payoff.** Effort ends in an engine-supported result. That may be spectacle, a static district benefit, export revenue, or an intentional late-game prestige sink. No effect is described as launch-triggered until a test proves that connection.
 4. **Graduated complexity.** The Sputnik satellite loop is a complete game. Crewed flight and heavy lift are layers on top, never a requirement for the first candle.
 5. **Performance discipline.** Hard polygon and texture budgets, shared atlases, no scripted eye-candy the engine does not already play.
 
@@ -30,7 +30,7 @@ Every feature maps to one of these. If it does not, it is deferred or cut.
 
 | Scale | Name | Promise |
 |---|---|---|
-| Chapter 1 | **Sputnik** | One orbital launch loop a late-game republic can finish |
+| Chapter 1 | **Sputnik** | One engine-verified rocket production and transport loop a late-game republic can finish |
 | Product v1.0 | **Kosmograd** | A cosmodrome district you would screenshot |
 
 Chapter 1 is not a demo that gets thrown away. Its buildings stay. v1.0 adds neighbours, not replacements.
@@ -39,7 +39,7 @@ Chapter 1 is not a demo that gets thrown away. Its buildings stay. v1.0 adds nei
 
 Sputnik is shippable when:
 
-- The loop runs start-to-finish on a fresh map without cheats.
+- The loop runs start-to-finish three consecutive times on the pinned game build and survives save/reload.
 - The mod loads alone on the current game version.
-- The complex costs enough to feel like a state project and can pay back over a few in-game years of launches.
+- The complex costs enough to feel like a state project, and its economic role is described from measured behavior. Payback is promised only if a launch-dependent revenue mechanism exists.
 - The Workshop page is honest: features, load notes, changelog, tested game version.

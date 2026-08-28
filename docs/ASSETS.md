@@ -93,7 +93,7 @@ Night variant if present: second material `material_e.mtl` as vanilla does.
 
 ---
 
-# P1 buildings
+# Building catalog
 
 ## 1. Kosmograd Rocket Factory
 
@@ -101,7 +101,7 @@ Night variant if present: second material `material_e.mtl` as vanilla does.
 |---|---|
 | Folder | `workshop/buildings/kosm_rocket_factory/` |
 | Display | `$NAME_STR "Kosmograd Rocket Factory"` |
-| Phase | P1 |
+| Phase | P3 candidate — requires S8 |
 | Role | Produces `kosm_stage_k1` cargo vehicles for open trucks |
 | Inspired by | MIK / horizontal booster halls, not a named OKB |
 
@@ -157,9 +157,9 @@ Place `$STATION_NOT_BLOCK_DETOUR_POINT` in the court so two trucks can pass.
 | Size | 34 × 12 m high × 46 m |
 | Budget | 5 000 tris, 1024² (atlas) |
 | Grey-box | One box 34 × 12 × 46 named `Main` |
-| Final silhouette | Long MIK-style hall, **two arched roof bays**, rail-style sliding doors on the −Z gable even if P1 is road-only (visual), blue-grey panels, red star **painted** on the texture over the gate (not geometry), external pipe run on −X |
+| Final silhouette | Long MIK-style hall, **two arched roof bays**, rail-style sliding doors on the −Z gable even if the asset remains road-only, blue-grey panels, red star **painted** on the texture over the gate (not geometry), external pipe run on −X |
 | Nodes | `Main` (always). Optional `Office` as a 6 m front block if tris remain |
-| Doors | Opening not required in P1 (`$MOVEABLE_DOOR` later) |
+| Doors | Opening not required for the first P3 implementation (`$MOVEABLE_DOOR` later) |
 | Particles | Optional `$PARTICLE factory_small_gray` at roof vents |
 
 **Not in the mesh:** interiors, chairs, a full rocket. The product is a vehicle the factory emits.
@@ -188,7 +188,7 @@ Save blender/assets/buildings/kosm_rocket_factory/kosm_rocket_factory.blend
 |---|---|
 | Folder | `workshop/buildings/kosm_satellite_factory/` |
 | Display | `$NAME_STR "Kosmograd Satellite Factory"` |
-| Phase | P1 |
+| Phase | P3 candidate — requires S8 |
 | Role | Produces `kosm_vestnik_1` |
 | Inspired by | Clean-room annex + hall, still panel architecture |
 
@@ -256,8 +256,8 @@ blender/assets/buildings/kosm_satellite_factory/
 |---|---|
 | Folder | `workshop/buildings/kosm_assembly_center/` |
 | Display | `$NAME_STR "Kosmograd Assembly Center"` |
-| Phase | P1 |
-| Role | Consumes stages + Vestnik (preferred) or resources (fallback). Emits `kosm_zarya_k1`. Loads it onto rail if S1 allows. |
+| Phase | P1 core |
+| Role | P1 consumes direct vanilla resources and emits `kosm_zarya_k1`. Physical stage/payload inputs are a P3 candidate requiring S8. Loads the rocket onto rail if S1/S2 allow. |
 | Inspired by | MIK horizontal integration, both gables open |
 
 ### Engine
@@ -296,7 +296,7 @@ $CONNECTION_RAIL
 
 If allow-pass-through is needed, **COPY** `$CONNECTION_RAIL_ALLOWPASS` pairing from a vanilla through-station. Do not guess extra tokens.
 
-Resource fallback consumption (only if vehicle inputs fail — see ARCHITECTURE.md):
+P1 direct resource consumption:
 
 ```ini
 $CONSUMPTION steel 0.141
@@ -349,7 +349,7 @@ blender/assets/buildings/kosm_assembly_center/
 |---|---|
 | Folder | `workshop/buildings/kosm_fuel_refinery/` |
 | Display | `$NAME_STR "Kosmograd Fuel Refinery"` |
-| Phase | P1 |
+| Phase | P3 candidate — requires S5 |
 | Role | `oil` + `chemicals` → vanilla `fuel` (token **COPY** from vanilla refinery) |
 | Inspired by | Small chemical plant + tank farm, not a civilian mega-refinery |
 
@@ -422,8 +422,8 @@ Export OBJ. Save blender/assets/buildings/kosm_fuel_refinery/
 |---|---|
 | Folder | `workshop/buildings/kosm_launch_pad/` |
 | Display | `$NAME_STR "Kosmograd Launch Pad"` |
-| Phase | P1 |
-| Role | Rail unload, fuel, 50 m airplane stand, takeoff, loyalty |
+| Phase | P1 core |
+| Role | Rail unload, 50 m airplane stand and the endpoint proven by S4. Fuel requires S5; loyalty is static unless S6 proves otherwise. |
 | Inspired by | Gagarin's Start / Baikonur pad 1 *as a type of place*, not a replica |
 
 ### Engine
@@ -518,7 +518,7 @@ Export OBJ Y-up. Save blender/assets/buildings/kosm_launch_pad/
 
 ---
 
-# P1 vehicles
+# Vehicle catalog
 
 ## 6. Zarya-K1 (airplane rocket)
 
@@ -526,7 +526,7 @@ Export OBJ Y-up. Save blender/assets/buildings/kosm_launch_pad/
 |---|---|
 | Folder | `workshop/vehicles/kosm_zarya_k1/` |
 | Display | `$NAME_STR "Zarya-K1"` |
-| Phase | P1 |
+| Phase | P1 core |
 | Role | The launch vehicle. Airplane. Must be loaded until the pad. |
 | Inspired by | R-7 / 8K71 cluster, **not a replica** — four strap-ons + core + small blunt payload fairing |
 
@@ -596,7 +596,7 @@ blender/assets/vehicles/kosm_zarya_k1/
 |---|---|
 | Folder | `workshop/vehicles/kosm_stage_k1/` |
 | Display | `$NAME_STR "Zarya-K1 Stage Set"` |
-| Phase | P1 |
+| Phase | P3 candidate — requires S8 |
 | Role | Factory output. Open truck cargo. Input to VAB. |
 
 ### Engine
@@ -643,7 +643,7 @@ Export OBJ Y-up. Save blender/assets/vehicles/kosm_stage_k1/
 |---|---|
 | Folder | `workshop/vehicles/kosm_vestnik_1/` |
 | Display | `$NAME_STR "Vestnik-1"` |
-| Phase | P1 |
+| Phase | P3 candidate — requires S8 |
 | Role | The satellite. Truck cargo. VAB input. Not a flying vehicle. |
 | Inspired by | Polished sphere + four rear antennas — **homage, not a 1:1 Sputnik 1** |
 
@@ -688,7 +688,7 @@ Origin ground centre. Export OBJ. Save blender/assets/vehicles/kosm_vestnik_1/
 |---|---|
 | Folder | `workshop/vehicles/kosm_transporter_erector/` |
 | Display | `$NAME_STR "Kosmograd Transporter-Erector"` |
-| Phase | P1 |
+| Phase | P1 core |
 | Role | Carries Zarya-K1 (and nothing else if `$RESOURCE_ALLOW_ONLY` can name a vehicle — UNVERIFIED). Heavy. Long. |
 
 ### Engine
@@ -749,9 +749,9 @@ Save blender/assets/vehicles/kosm_transporter_erector/
 
 ---
 
-# P3 sheets (do not model in P1)
+# P4 sheets (do not model before the phase starts)
 
-Short contracts so the catalog already knows what "done" means. Full token blocks are written when P3 starts, copied from the nearest P1 analogue.
+Short contracts so the catalog already knows what "done" means. Full token blocks are written when P4 starts, copied from the nearest verified analogue.
 
 | Folder | Type | Size m | Tris | Silhouette |
 |---|---|---|---|---|

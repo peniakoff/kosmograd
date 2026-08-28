@@ -4,7 +4,7 @@ Instruction layer for an AI (code, ini, or Blender MCP) working in this reposito
 
 ## Product
 
-Kosmograd: Sputnik — a WR:SR mod. First ship is one logistics launch loop. Read `README.md`, then `docs/DECISIONS.md`, then the file that matches the task.
+Kosmograd: Sputnik — a WR:SR mod in feasibility work. First ship is a four-asset rocket production and rail-transport core. Read `README.md`, `ROADMAP.md`, then `docs/DECISIONS.md` and the file that matches the task.
 
 ## Hard rules
 
@@ -14,7 +14,8 @@ Kosmograd: Sputnik — a WR:SR mod. First ship is one logistics launch loop. Rea
 4. One `$TYPE` per building.
 5. Grey-box footprints in `docs/ASSETS.md` are frozen.
 6. Start every ini from a vanilla file of the same type when the human can provide it; otherwise leave `COPY FROM VANILLA` comments, do not invent a parallel schema.
-7. Do not implement P3 folders unless the task says P3.
+7. Do not implement P3/P4 assets unless the decision gate and task authorize that phase.
+8. Never describe a fallback, launch lifecycle or reward as working without a recorded P0 result.
 8. Do not edit vanilla game files.
 
 ## Task routing
