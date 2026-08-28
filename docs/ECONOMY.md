@@ -1,6 +1,6 @@
 # Economy
 
-All numbers are **starting values**. They freeze only at P4. Tune in-game; do not invent a second table in a spreadsheet that the ini files do not match.
+All numbers are **starting values**. They freeze only in the balance phase. Tune in game; do not invent a second table that the ini files do not match.
 
 Production amounts in WR:SR are **per worker per workday**. A building with more `$WORKERS_NEEDED` produces more at 100% staffing. The rates below are written as **building totals at 100% staff** and must be converted when writing `$PRODUCTION` / `$CONSUMPTION` lines:
 
@@ -12,9 +12,9 @@ Verify this conversion against a vanilla factory of known throughput during P0. 
 
 ## Capital cost (target band)
 
-The full P1 complex (five buildings, no monuments) should land as a **late-game state project**: tens of millions of rubles, driven by mesh bounding boxes via `$COST_RESOURCE_AUTO`, not a handmade ruble token.
+The four-asset P1 core should feel like a **late-game state project**. Do not promise a ruble total before the pinned game build calculates one. `$COST_RESOURCE_AUTO` and model geometry influence construction resources; the technical test must record the actual bill shown by the game.
 
-Grey-box footprints in [ASSETS.md](ASSETS.md) are therefore frozen. Changing a hall from 34 × 46 m to "a bit bigger" is an economy change.
+Grey-box footprints in [ASSETS.md](ASSETS.md) are stable inputs to testing. Changing a hall from 34 × 46 m to "a bit bigger" requires a new construction-cost measurement.
 
 ## Vanilla inputs only
 
@@ -33,7 +33,24 @@ Grey-box footprints in [ASSETS.md](ASSETS.md) are therefore frozen. Changing a h
 
 No avionics good. No RP-K good. No Glory good.
 
-## P1 throughput (starting)
+## P1 core throughput (starting)
+
+### Assembly center — 1.0 Zarya-K1 per 10 workdays at 100% staff
+
+85 workers, 20 professors. P1 deliberately uses direct vanilla resource inputs:
+
+| | t / rocket |
+|---|---|
+| `steel` | 12 |
+| `aluminium` | 5 |
+| `mcomponents` | 3.5 |
+| `ecomponents` | 1.4 |
+
+This is the only production economy required for P1. Convert these totals to ini amounts only after validating the game's throughput multiplier against a pinned vanilla production line.
+
+## P3 extended-logistics candidates
+
+The following rates remain design candidates. They become shipped economy only if S8 proves that the delivered vehicles can causally gate assembly.
 
 ### Satellite factory — 1.0 Vestnik-1 per 8 workdays at 100% staff
 
@@ -57,24 +74,7 @@ Slow on purpose. The first satellite is an event.
 | `aluminium` | 4 |
 | `mcomponents` | 3.2 |
 
-One "stage set" cargo vehicle stands in for the cluster of boosters + core. We do not ship four strap-on vehicles in P1.
-
-### Assembly center — 1.0 Zarya-K1 per 10 workdays at 100% staff
-
-85 workers, 20 professors.
-
-Preferred inputs: 1× `kosm_stage_k1` + 1× `kosm_vestnik_1` as imported vehicles.
-
-Resource-only fallback (if vehicles cannot be inputs):
-
-| | t / rocket |
-|---|---|
-| `steel` | 12 |
-| `aluminium` | 5 |
-| `mcomponents` | 3.5 |
-| `ecomponents` | 1.4 |
-
-Plus electricity high enough to hurt if the player has a weak grid.
+One "stage set" cargo vehicle stands in for the cluster of boosters + core. We do not ship four separate strap-on vehicles.
 
 ### Fuel refinery — 1.0 t fuel per day at 100% staff (30 workers)
 
@@ -83,26 +83,36 @@ Plus electricity high enough to hurt if the player has a weak grid.
 | `oil` | 0.7 |
 | `chemicals` | 0.4 |
 
-A light launch should burn on the order of **8–16 t** of fuel (PDF light/medium band). That is several days of this plant, or a pre-fill from tanks. Do not make it 200 t; the truck/pipe route should stay busy, not absurd.
+A light launch design target is **8–16 t** of fuel. This number has no gameplay authority until S5 proves refuelling and records the actual amount consumed.
 
 If vanilla airplanes consume fuel from `$STORAGE_FUEL` by tank volume rather than a mission ticket, set Zarya-K1 fuel capacity so that **one fill ≈ one launch**. COPY a vanilla jet's fuel tokens, then scale.
 
-### Pad
+### P1 pad
 
-No `$PRODUCTION` in the primary design. It is a station. Loyalty is the payout.
+No `$PRODUCTION` in the primary design. It is a station. Its function is transport and, if S5 passes, refuelling.
 
-If S3 fallback (consume the airplane): treat the pad as a factory that consumes the parked vehicle and emits nothing, with particles. There may be no legal `$CONSUMPTION` for a vehicle type — in that case the "consume" is the airplane taking off and despawning, which is the primary design anyway.
+There is currently no accepted consume-vehicle fallback. A factory that consumes a vehicle is not part of the architecture until demonstrated in game. If S4 fails, use the P0 decision gate rather than inventing an economic sink in documentation.
 
-## Loyalty (P1 payout)
+## Loyalty candidate
 
-Starting monument tokens on the pad **or** memorial:
+Starting monument tokens for a dedicated memorial, or for the pad only if S6 confirms that this type accepts them:
 
 ```text
 $MONUMENT_GOVERNMENT_LOYALTY_RADIUS 400
 $MONUMENT_GOVERNMENT_LOYALTY_STRENGTH 2.8
 ```
 
-Radius huge, strength high. Tune so a launch district is felt in nearby cities, not on the other side of a 16 km map unless testing says the engine already maps 400 m as "large". Vanilla monuments are the calibration. **COPY** a Lenin statue or victory monument and go larger, do not guess a 5000 m radius that might be clamped.
+Treat this as a static area effect. Do not call it a launch pulse, per-launch payout or proof that launch cadence repays the complex. Calibrate against a pinned vanilla monument and record the measured affected area.
+
+## Economic role decision
+
+Before balance freeze, select exactly one label supported by measurements:
+
+- **Prestige sink:** launches consume resources for spectacle and player goals.
+- **Static district benefit:** completing the complex enables a persistent local effect.
+- **Revenue program:** an engine-supported export or payment is causally linked to output.
+
+The current prototype is a **prestige sink candidate**. It has no demonstrated launch-dependent revenue and therefore no documented payback period.
 
 ## PDF Glory table (design target only)
 
@@ -117,11 +127,11 @@ Kept so P3 content has a north star. **Not implemented as a resource.**
 | T2b | Zarya-K2 | Chaika | 45 |
 | T3a | Bogatyr | long-duration crew | 90 |
 
-P3 "unlocks" are `$AVAILABLE` years on the heavier vehicles plus extra buildings, not a Glory counter hitting 30.
+Later "unlocks" are `$AVAILABLE` years on the heavier vehicles plus extra buildings, not a Glory counter hitting 30.
 
-## Export safety valve (P3)
+## Export safety valve candidate (post-P3)
 
-A sellable Vestnik variant without `$CARGOVEHICLE_MUSTBE_LOADED` (or with `$CARGOVEHICLE_CANBE_LOADED` and a purchase price) can go through customs. Floor price should be worse than flying. Do not add this in P1 or the pad will starve.
+A sellable Vestnik variant without `$CARGOVEHICLE_MUSTBE_LOADED` may be tested after the physical payload chain works. It is a separate revenue mechanic, not evidence of a launch payout. Do not add it while validating S8 because an export route would hide failures in the pad chain.
 
 ## What not to tune
 

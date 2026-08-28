@@ -7,11 +7,11 @@ Two source documents described Kosmograd. They agree on the feeling and disagree
 | **MD** — *Kosmograd: Sputnik – WR:SR Mod Development Master Plan* | MVP: five buildings, airplane-as-rocket, cargo parts, rail erector, historical Sputnik 1 framing, `script.ini` tokens |
 | **PDF** — *Kosmograd Mod Design & Development Plan v1.0* | Full expansion: 18 buildings, 3 rockets, 4 spacecraft, Glory economy, original names, grey-box art pipeline, illustrative JSON |
 
-## Decision 1 — Ship the Sputnik loop, not eighteen buildings
+## Decision 1 — Prove and ship the four-asset core first
 
-**Choice.** P1 is the MD's five-building launch chain. The PDF's eighteen-building cosmodrome is P3, after the loop works.
+**Choice.** P1 contains the Assembly Center, Zarya-K1, Transporter-Erector and Launch Pad. It is resource-fed. The stage, satellite and dedicated fuel factories move to P3 and require S8 before implementation. The full cosmodrome is P4.
 
-**Why.** The PDF is the right *product*. The MD is the right *first ship*. A grey-box pad that actually launches will teach more than a district of unconnected halls. The PDF already says "playable first, pretty later"; applying that to *scope* as well as art is the honest version of the same rule.
+**Why.** The unique risk is the cargo-airplane lifecycle, not factory modelling. Four assets prove that lifecycle with less sunk art. Parallel stage deliveries that cannot gate rocket output would violate the real-logistics pillar rather than deepen it.
 
 ## Decision 2 — Vehicles are the goods. There are no custom resources.
 
@@ -29,14 +29,14 @@ The PDF's "hook-light" instinct is kept: consume only vanilla intermediates (`st
 
 P0 spikes S1 and S2 exist because the remaining uncertainty is empirical, not rhetorical.
 
-## Decision 4 — Airplane rocket is the primary launch. Consumption is the fallback.
+## Decision 4 — Airplane rocket is the launch candidate. No fallback is accepted yet.
 
 **Choice.**
 
 1. **Primary (MD).** Zarya-K1 is `$TYPE VEHICLETYPE_AIRPLANE` with `$CARGOVEHICLE_MUSTBE_LOADED`, near-zero `$TAKEOFF_DISTANCE`, mesh authored nose-up. The pad parks it on `$AIRPLANE_STATION_50M`. Takeoff is the show.
-2. **Fallback (PDF, adapted).** If the airplane taxis to a civilian airport, refuses to stand, or will not climb, the pad becomes a factory-like consumer: the vehicle is unloaded and removed; particles and a loyalty pulse are the presentation. The PDF was right that *there is no spaceflight physics*. It was wrong to skip the spectacle before testing it.
+2. **Failure handling.** If the airplane taxis to a civilian airport, refuses to stand, will not climb, requires an unsuitable route or cannot reach a repeatable lifecycle endpoint, P0 records **PIVOT**. A consuming pad is only a fallback candidate until a cube test demonstrates legal vehicle consumption and removal.
 
-**Why.** Players will remember a candle. They will not remember a storage bar ticking down. We still design the logistics so the fallback does not require a different factory chain.
+**Why.** Players will remember a candle, but documentation cannot manufacture one. The endpoint must be observed three times and survive save/reload before art or Workshop copy promises a launch.
 
 ## Decision 5 — Original names, Sputnik era
 
@@ -72,19 +72,19 @@ Corrected from the MD:
 
 ## Decision 7 — Grey-box, budgets, shared atlas (from the PDF)
 
-**Choice.** Every P1 building ships as a footprint-correct grey-box. Polygon and texture ceilings from the PDF concept sheets are law. Shared concrete/metal atlas. Weathering in the texture, not in the mesh.
+**Choice.** Every implemented asset begins as a footprint-correct grey-box. Grey-boxes prove mechanics privately; representative final art is required before public visibility. Polygon and texture ceilings from the PDF concept sheets remain ceilings. Shared concrete/metal atlas. Weathering in the texture, not in the mesh.
 
 **Why.** The MD skipped art process. The PDF's Chapter 8 is the part of that document that should survive any scope cut.
 
-## Decision 8 — Prestige pays, but through tokens the engine has
+## Decision 8 — Reward language follows observed behavior
 
-**Choice.** The PDF Glory table (unlocks at 30 / 100 / 200, republic-wide boosts, museum multiplier) is the *design target* for P3+. In engine, for P1:
+**Choice.** The PDF Glory table remains a fiction reference, not an implementation target. In engine:
 
-- Pad and/or memorial: `$MONUMENT_GOVERNMENT_LOYALTY_RADIUS` + `$MONUMENT_GOVERNMENT_LOYALTY_STRENGTH` at high values.
-- Optional `$TYPE_ATTRACTION` on the memorial / museum for culture.
-- Satellites remain exportable as vehicles through vanilla customs if they are not flagged must-be-loaded-only — **or** they stay must-be-loaded and the only sink is the pad. P1 uses the pad as the sink so the loop is forced. Export as a safety valve is a P3 flag flip (`$CARGOVEHICLE_CANBE_LOADED` without must-be, or a sellable vehicle variant).
+- Monument tokens are treated as a static area effect unless S6 proves otherwise.
+- Optional attraction or museum effects belong to P4 and must be described as persistent building functions.
+- Export revenue is a separate later mechanic and cannot be counted as launch payback unless the game causally links it to the launch output.
 
-There is no scripted mission-duration payout and no custom Glory counter. Do not promise a UI the game cannot show.
+There is no scripted mission-duration payout, per-launch loyalty pulse or custom Glory counter. Until another mechanism is demonstrated, Kosmograd is a prestige-sink candidate.
 
 ## Decision 9 — Git repo vs Workshop WIP
 
@@ -92,12 +92,19 @@ There is no scripted mission-duration payout and no custom Glory counter. Do not
 
 **Why.** The PDF said "Git from day one". The MD described only the staging tree. Both are true if git is the parent.
 
-## P0 spike results
+## P0 decision and spike results
 
-Fill these in when S1–S3 from [ROADMAP.md](../ROADMAP.md) are run. Until then the architecture in [ARCHITECTURE.md](ARCHITECTURE.md) is the **intended** machine.
+Fill these in when S1–S8 from [ROADMAP.md](../ROADMAP.md) are run. Until S1–S7 pass, the architecture in [ARCHITECTURE.md](ARCHITECTURE.md) is a target, not a working machine.
 
 | Spike | Date | Result | Action taken |
 |---|---|---|---|
 | S1 Production line → must-be-loaded airplane | | | |
-| S2 Cargo airport + rail vehicle unload + 50 m stand | | | |
-| S3 Nose-up mesh + tiny takeoff distance climbs | | | |
+| S2 VAB → vehicle-carrying rail wagon | | | |
+| S3 Rail wagon → cargo-airplane stand | | | |
+| S4 Complete airplane lifecycle | | | |
+| S5 Pad refuelling and measured consumption | | | |
+| S6 Loyalty context and timing | | | |
+| S7 Mixed Workshop item and paths | | | |
+| S8 Manufactured vehicles as causal inputs | | | |
+
+**P0 decision:** `NOT MADE` — replace with `GO`, `PIVOT` or `STOP`, date and rationale after S1–S7.

@@ -1,6 +1,6 @@
 # Architecture
 
-Workers & Resources has no space program. Kosmograd is a composition of types the engine already understands.
+Workers & Resources has no space program. Kosmograd is an attempt to compose types the engine already understands. Until P0B passes, this file describes the target architecture rather than confirmed engine behavior.
 
 Read [DECISIONS.md](DECISIONS.md) for why this composition won. Read [ASSETS.md](ASSETS.md) for per-asset tokens. This file is the machine as a whole.
 
@@ -10,7 +10,7 @@ Read [DECISIONS.md](DECISIONS.md) for why this composition won. Read [ASSETS.md]
 - No new resource types.
 - No custom UI.
 - No launch physics beyond what an airplane already does.
-- Max 32 buildings + vehicles per Workshop item (wiki). Sputnik P1 is 5 + 4 = 9. Headroom is for P3.
+- Max 32 buildings + vehicles per Workshop item (wiki). Sputnik P1 is 2 + 2 = 4. Mixed-pack loading and paths still require spike S7.
 - Spaces in `$NAME_STR` quotes only. No spaces in folder names.
 
 ## The four engine tricks
@@ -28,13 +28,13 @@ Read [DECISIONS.md](DECISIONS.md) for why this composition won. Read [ASSETS.md]
 
 Vanilla airplanes sit on their belly along the parking Z axis. We do not animate a tilt-up. We author the mesh already vertical and rotate it **down** only while it is visualized as wagon cargo (`$CARGOVEHICLE_VISUALIZATION` rotation on the erector).
 
-If spike S3 fails (it taxis, tips, or seeks a civilian runway), stop fighting the airplane AI. Switch the pad to the consumption fallback. Do not add a second rocket type "just in case" — change the pad, keep the vehicle as a must-be-loaded hull the factory still produces.
+Spike S4 must document the airplane's complete lifecycle: route requirements, departure, persistence or removal, and repeatability after save/load. If it taxis, tips, seeks a civilian runway or cannot reach a stable endpoint, use the P0 **PIVOT** decision. There is no accepted consumption fallback yet.
 
-### 2. Stages and the satellite are cargo vehicles
+### 2. Stages and the satellite are P3 cargo-vehicle candidates
 
 `kosm_stage_k1` and `kosm_vestnik_1` are road vehicles with `$MOVEMENT_SPEED 0` (or omitted / zero) and `$CARGOVEHICLE_MUSTBE_LOADED`. Factories produce them the way a car plant produces cars. Open-hull trucks haul them. They never drive.
 
-This is the only way to "manufacture a satellite" without a new resource.
+This is a plausible way to manufacture a satellite without a new resource. P3 proceeds only if S8 proves that delivering these vehicles can causally gate VAB output.
 
 ### 3. The erector is a rail wagon that carries vehicles
 
@@ -65,26 +65,26 @@ That one type is allowed to have:
 - `$CONNECTION_PIPE_INPUT` — fuel in
 - `$STATION_NOT_BLOCK` — do not deadlock the only pad
 
-Unloading a vehicle wagon onto an airplane stand **is spike S2**. If a cargo airport will not accept vehicle cargo from rail, split:
+Unloading a vehicle wagon onto an airplane stand is spike S3. If a cargo airport will not accept vehicle cargo from rail, test the split candidate:
 
 ```text
 kosm_rail_terminus   $TYPE_CARGO_STATION   (rail in, vehicles out to short road)
 kosm_launch_pad      $TYPE_AIRPLANE_PARKING or $TYPE_CARGO_STATION $SUBTYPE_AIRPLANE
 ```
 
-and make the player haul the last hundred metres by a heavy road trailer — worse poetry, same loop.
+This split becomes an accepted fallback only after a cube test proves the transfer between both buildings.
 
-Loyalty is **not** a second `$TYPE` on the pad. Try monument tokens on the pad first (they sit in the "other tokens" list, not only under `$TYPE_MONUMENT`). If they no-op, ship `kosm_memorial_plaza` as `$TYPE_MONUMENT` beside the pad (P3 priority A, or P1 hotfix).
+Loyalty is not a second `$TYPE` on the pad. S6 checks whether monument tokens are accepted there, but their documented meaning is a static radius/strength effect. If needed, `kosm_memorial_plaza` may become a separate completion reward. Neither form is described as triggered by a launch without evidence.
 
-## Building types (P1)
+## Building types
 
 | Building | `$TYPE` | `$SUBTYPE` | Produces / does |
 |---|---|---|---|
-| Rocket factory | `$TYPE_PRODUCTION_LINE` | `$SUBTYPE_ROAD` | `kosm_stage_k1` vehicles |
-| Satellite factory | `$TYPE_PRODUCTION_LINE` | `$SUBTYPE_ROAD` | `kosm_vestnik_1` vehicles |
-| Assembly center | `$TYPE_PRODUCTION_LINE` | `$SUBTYPE_AIRPLANE` | `kosm_zarya_k1` airplane |
-| Fuel refinery | `$TYPE_FACTORY` | — | vanilla `fuel` from `oil` + `chemicals` |
+| Assembly center (P1) | `$TYPE_PRODUCTION_LINE` | `$SUBTYPE_AIRPLANE` | resources → `kosm_zarya_k1` airplane |
 | Launch pad | `$TYPE_CARGO_STATION` | `$SUBTYPE_AIRPLANE` | unload, fuel, park, launch |
+| Rocket factory (P3 candidate) | `$TYPE_PRODUCTION_LINE` | `$SUBTYPE_ROAD` | `kosm_stage_k1` vehicles |
+| Satellite factory (P3 candidate) | `$TYPE_PRODUCTION_LINE` | `$SUBTYPE_ROAD` | `kosm_vestnik_1` vehicles |
+| Fuel refinery (P3 candidate) | `$TYPE_FACTORY` | — | vanilla `fuel` from `oil` + `chemicals` |
 
 `$TYPE_PRODUCTION_LINE` `$SUBTYPE_ROAD` is how vanilla vehicle plants work. If a copied vanilla car plant uses a different type, **the vanilla file wins** — retcon this table after P0.
 
@@ -96,7 +96,7 @@ Until that copy exists, docs use `fuel` as the working name.
 
 The PDF wanted a unique RP-K blend. That would be a new resource. Instead the refinery is a **worse vanilla refinery**: it burns chemicals as well as oil, so the space program is not a free tap on the existing fuel network. The pad stores fuel with `$STORAGE_FUEL`.
 
-If `fuel` cannot be produced by a custom factory, the refinery becomes a themed tank farm (`$STORAGE_FUEL` only, `$TYPE_STORAGE` or a factory that only stores) and the airplane refuels from oil. Record that in DECISIONS.md. Do not invent `rp_k`.
+The dedicated refinery is P3 content. If custom production is not proven, omit it and use vanilla fuel. Do not add a themed duplicate that creates no new decision, and do not invent `rp_k`.
 
 ## Power, workers, professors
 
@@ -104,43 +104,31 @@ Space buildings need university labour. Use `$WORKERS_NEEDED` plus `$PROFESORS_N
 
 ## Construction
 
-Do not hand-author ruble costs. Use `$COST_WORK` phases and `$COST_RESOURCE_AUTO` so the bounding box of the mesh *is* the bill. Grey-boxes with the final footprint therefore have near-final cost. That is why grey-box dimensions in `ASSETS.md` are frozen.
+Do not hand-author ruble costs. Start with copied `$COST_WORK` phases and `$COST_RESOURCE_AUTO`, then record the actual construction bill in the pinned game build. Geometry and named construction nodes affect the result, but documentation must not infer a ruble total from footprint alone.
 
-## Data flow (P1)
+## Data flow (P1 core)
 
 ```text
-                    mcomponents, steel, aluminium
+             steel, aluminium, mcomponents, ecomponents
                                 │
-                     kosm_rocket_factory
-                                │  kosm_stage_k1  (truck, open)
                                 ▼
-                     kosm_assembly_center  ◄── kosm_vestnik_1 (truck)
+                     kosm_assembly_center
                                 │
-                                │  consumes stages + satellite as
-                                │  imported vehicles, outputs kosm_zarya_k1
+                                │  outputs kosm_zarya_k1
                                 ▼
                   kosm_transporter_erector  (train)
                                 │
                                 ▼
                        kosm_launch_pad
                                 ▲
-                     kosm_fuel_refinery
-                      oil + chemicals → fuel
+                         vanilla fuel
 ```
 
-How a production line *consumes vehicles* as inputs is the fragile joint. Vanilla car plants consume **resources** and emit vehicles. They do not eat other cars.
-
-**If the VAB cannot take vehicles as inputs**, use this fallback (still P1, still no new resource):
-
-- Rocket factory and satellite factory still emit cargo vehicles (visual logistics).
-- Those vehicles are hauled to the VAB and stored in `$STORAGE_IMPORT` of type `RESOURCE_TRANSPORT_VEHICLES` if the type allows it.
-- If import-of-vehicles fails, the two feeder factories become **thematic resource sinks** that consume the same vanilla goods the VAB also consumes, and the cargo vehicles are optional flavour produced at low rate. The VAB then builds Zarya-K1 from resources only.
-
-The preferred fiction is physical stages on trucks. The required fiction is a rocket that must be railed to the pad. Cut the feeder vehicles before cutting the erector.
+P1 intentionally feeds the VAB with resources. It does not pretend that parallel stage or satellite deliveries are consumed. S8 separately tests whether the physical P3 chain is possible. If S8 fails, the feeder factories and cargo vehicles remain unshipped; duplicated thematic resource sinks are not an acceptable substitute for causality.
 
 ## What we do not script
 
-There is no mission duration, no countdown UI, no success roll in P1. Staffing + inputs + a takeoff (or consume) **is** the mission. A later optional failure module stays a toggle in the PDF's sense and is out of scope until the loop is boringly reliable.
+There is no mission duration, countdown UI or success roll in P1. Staffing, inputs, physical transport and the endpoint proven by S4 are the mission. Random failure is out of scope for the v1 line.
 
 ## File layout inside a Workshop item
 

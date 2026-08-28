@@ -13,7 +13,15 @@
 - Getting started with asset creation (files actually required)  
   https://steamcommunity.com/app/784150/discussions/0/2244426186191135241/
 
-When these pages and this repo disagree, **those pages win** until a P0 spike is written into `docs/DECISIONS.md`.
+These guides are useful but not sufficient proof. The vehicle guide may also appear removed or incompatible in Steam while its text remains readable. For implementation, the precedence order is:
+
+1. Observed behavior on the game build pinned in `TESTING.md`.
+2. A vanilla object from that exact build using the same type and token context.
+3. Current official wiki guidance.
+4. Community/Steam token guides, with their revision date recorded.
+5. This repository's hypotheses.
+
+Every P0 spike records the relevant vanilla path and minimal diff so a future game update can be retested without relying on memory.
 
 ## Tools
 

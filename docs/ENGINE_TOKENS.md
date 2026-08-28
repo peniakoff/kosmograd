@@ -1,20 +1,29 @@
 # Engine tokens
 
-Source of truth for "does this token exist?": LovelyPL's Steam guides and vanilla files. This page is a working subset for Kosmograd. When vanilla disagrees, vanilla wins.
+Primary source of truth is the matching vanilla file from the game build pinned in `TESTING.md`. Public guides are discovery aids and syntax references; they may lag the current game. When a guide and pinned vanilla disagree, pinned vanilla wins and the discrepancy is recorded.
 
-Legend: **OK** = in the public guides · **COPY** = copy from a named vanilla file, token may exist beyond the appendix · **UNVERIFIED** = hypothesis, P0 must confirm · **REJECTED** = appeared in early drafts, do not use.
+Legacy status legend used by the inventory below: **OK** = documented syntax exists · **COPY** = copy from a named vanilla object · **UNVERIFIED** = hypothesis · **REJECTED** = do not use.
+
+`OK` does **not** mean valid for every building type or verified in Kosmograd. Every token used in a candidate build must also have a row in the spike or asset note with:
+
+| Field | Meaning |
+|---|---|
+| Documented | Syntax exists in a guide or pinned vanilla file |
+| Context | A pinned vanilla object uses it with the same `$TYPE` / subtype |
+| Verified | Kosmograd loaded it and produced the expected observable behavior |
+| Source | Game build and vanilla relative path, or guide revision |
 
 ## Buildings — types we actually use
 
 | Token | Status | Notes |
 |---|---|---|
-| `$TYPE_FACTORY` | OK | Fuel refinery |
+| `$TYPE_FACTORY` | OK | P3 fuel-refinery candidate |
 | `$TYPE_PRODUCTION_LINE` | OK | Vehicle / airplane plants |
 | `$SUBTYPE_ROAD` | OK | With production line |
 | `$SUBTYPE_AIRPLANE` | OK | With production line **or** cargo station |
-| `$SUBTYPE_RAIL` | OK | Train plants; not P1 pad |
+| `$SUBTYPE_RAIL` | OK | Train plants; not used by the P1 pad |
 | `$TYPE_CARGO_STATION` | OK | Pad |
-| `$TYPE_AIRPLANE_PARKING` | OK | S2 fallback for pad |
+| `$TYPE_AIRPLANE_PARKING` | OK | S3 fallback candidate for pad |
 | `$TYPE_MONUMENT` | OK | Memorial plaza |
 | `$TYPE_ATTRACTION` | OK | Museum |
 | `$TYPE_STORAGE` | OK | Fuel farm fallback |
@@ -89,7 +98,7 @@ Coordinates: two points `(x y z)` `(x2 y2 z2)`. **Y is up.** Y = 0 is ground for
 | `$COUNTRY 39011` | OK |
 | `$AVAILABLE y1 y2` | OK |
 | `$COST_RUB 1` | OK |
-| `$MOVEMENT_SPEED n` | OK — **0 means must be hauled** |
+| `$MOVEMENT_SPEED n` | OK — speed only; `$CARGOVEHICLE_MUSTBE_LOADED` defines the transport requirement |
 | `$MOVEMENT_POWER_KW n` | OK |
 | `$MOVEMENT_EMPTY_WEIGHT n` | OK (tons) |
 | `$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_VEHICLES` | OK |
