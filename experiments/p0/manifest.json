@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "game_build": "23935965",
+  "objects": {
+    "p0_pipeline_shed": {
+      "kind": "building",
+      "source": "assets/p0_pipeline_shed",
+      "required": ["building.ini", "renderconfig.ini", "model.nmf", "material.mtl", "diffuse.dds", "imagegui.png"]
+    },
+    "p0_factory": {
+      "kind": "building",
+      "source": "assets/p0_factory",
+      "required": ["building.ini", "renderconfig.ini", "model.nmf", "material.mtl", "diffuse.dds", "imagegui.png"]
+    },
+    "p0_pad": {
+      "kind": "building",
+      "source": "assets/p0_pad",
+      "required": ["building.ini", "renderconfig.ini", "model.nmf", "material.mtl", "diffuse.dds", "imagegui.png"]
+    },
+    "p0_transfer": {
+      "kind": "building",
+      "source": "assets/p0_transfer",
+      "required": ["building.ini", "renderconfig.ini", "model.nmf", "material.mtl", "diffuse.dds", "imagegui.png"]
+    },
+    "p0_airplane_parking": {
+      "kind": "building",
+      "source": "assets/p0_airplane_parking",
+      "required": ["building.ini", "renderconfig.ini", "model.nmf", "material.mtl", "diffuse.dds", "imagegui.png"]
+    },
+    "p0_rocket": {
+      "kind": "vehicle",
+      "source": "assets/p0_rocket",
+      "required": ["script.ini", "main.nmf", "material.mtl", "diffuse.dds"]
+    },
+    "p0_wagon": {
+      "kind": "vehicle",
+      "source": "assets/p0_wagon",
+      "required": ["script.ini", "main.nmf", "material.mtl", "diffuse.dds"]
+    },
+    "p0_road_carrier": {
+      "kind": "vehicle",
+      "source": "assets/p0_road_carrier",
+      "required": ["script.ini", "main.nmf", "material.mtl", "diffuse.dds"]
+    }
+  },
+  "spikes": {
+    "P0A": {
+      "variants": {
+        "primary": {
+          "title": "Asset pipeline shed",
+          "objects": ["p0_pipeline_shed"],
+          "vanilla_sources": [
+            {"path": "buildings_types/gas_station.ini"}
+          ]
+        }
+      }
+    },
+    "S1": {
+      "variants": {
+        "primary": {
+          "title": "Production line to must-be-loaded airplane",
+          "objects": ["p0_factory", "p0_rocket"],
+          "vanilla_sources": [
+            {"path": "buildings_types/production_airplane.ini"},
+            {"path": "airplanes/an14/script.ini"}
+          ]
+        }
+      }
+    },
+    "S2": {
+      "variants": {
+        "primary": {
+          "title": "Direct factory-to-rail loading",
+          "objects": ["p0_factory", "p0_rocket", "p0_wagon"],
+          "overlays": {"p0_factory": "overlays/S2/p0_factory"},
+          "vanilla_sources": [
+            {"path": "buildings_types/production_airplane.ini"},
+            {"path": "buildings_types/production_train.ini"},
+            {"path": "cwc/vehicles/w_ACFF7081/script.ini"}
+          ]
+        },
+        "fallback": {
+          "title": "Road transfer to vehicle rail storage",
+          "objects": ["p0_factory", "p0_rocket", "p0_road_carrier", "p0_transfer", "p0_wagon"],
+          "vanilla_sources": [
+            {"path": "buildings_types/spaceforvehicles_big.ini"},
+            {"path": "vehicles/open_mck/script.ini"},
+            {"path": "cwc/vehicles/w_ACFF7081/script.ini"}
+          ]
+        }
+      }
+    },
+    "S3": {
+      "variants": {
+        "primary": {
+          "title": "Rail unload to hybrid cargo-airplane stand",
+          "objects": ["p0_pad", "p0_rocket", "p0_wagon"],
+          "vanilla_sources": [
+            {"path": "buildings_types/airport_terminal_cargo.ini"},
+            {"path": "buildings_types/airplaneparking_50.ini"}
+          ]
+        },
+        "fallback": {
+          "title": "Rail storage to road carrier to cargo airport",
+          "objects": ["p0_transfer", "p0_wagon", "p0_road_carrier", "p0_rocket", "p0_pad", "p0_airplane_parking"],
+          "overlays": {"p0_pad": "overlays/S3-fallback/p0_pad"},
+          "vanilla_sources": [
+            {"path": "buildings_types/spaceforvehicles_big.ini"},
+            {"path": "vehicles/open_mck/script.ini"},
+            {"path": "buildings_types/airport_terminal_cargo.ini"},
+            {"path": "buildings_types/airplaneparking_50.ini"}
+          ]
+        }
+      }
+    },
+    "S4": {
+      "variants": {
+        "control": {
+          "title": "Vanilla-compatible 110 m takeoff control",
+          "objects": ["p0_pad", "p0_rocket"],
+          "vanilla_sources": [{"path": "airplanes/an14/script.ini"}]
+        },
+        "primary": {
+          "title": "One-metre launch endpoint",
+          "objects": ["p0_pad", "p0_rocket"],
+          "overlays": {"p0_rocket": "overlays/S4/p0_rocket"},
+          "vanilla_sources": [{"path": "airplanes/an14/script.ini"}]
+        }
+      }
+    },
+    "S5": {
+      "variants": {
+        "primary": {
+          "title": "Pad refuelling and measurable consumption",
+          "objects": ["p0_pad", "p0_rocket"],
+          "overlays": {"p0_rocket": "overlays/S4/p0_rocket"},
+          "vanilla_sources": [
+            {"path": "buildings_types/airport_terminal_cargo.ini"},
+            {"path": "airplanes/an14/script.ini"}
+          ]
+        }
+      }
+    },
+    "S6": {
+      "variants": {
+        "control": {
+          "title": "Pad without loyalty tokens",
+          "objects": ["p0_pad"],
+          "vanilla_sources": [{"path": "buildings_types/monument_star.ini"}]
+        },
+        "primary": {
+          "title": "Loyalty tokens on cargo-airplane pad",
+          "objects": ["p0_pad"],
+          "overlays": {"p0_pad": "overlays/S6/p0_pad"},
+          "vanilla_sources": [{"path": "buildings_types/monument_star.ini"}]
+        }
+      }
+    },
+    "S7": {
+      "variants": {
+        "primary": {
+          "title": "Mixed building and vehicle Workshop item",
+          "objects": ["p0_pipeline_shed", "p0_rocket"],
+          "vanilla_sources": [
+            {"path": "buildings_types/gas_station.ini"},
+            {"path": "airplanes/an14/script.ini"}
+          ]
+        }
+      }
+    }
+  }
+}

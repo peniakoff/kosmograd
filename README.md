@@ -83,7 +83,7 @@ The live Steam folder is **not** this repo. Create a WIP item in-game, then copy
 
 | Tool | Role |
 |---|---|
-| Blender 4.x | Modelling, UVs, grey-boxes. Driven by hand or [Blender MCP](docs/BLENDER_MCP.md) |
+| Blender 5.2.0 LTS (P0 pin) | Modelling, UVs, grey-boxes. Driven by hand or [Blender MCP](docs/BLENDER_MCP.md) |
 | paint.net / GIMP | Texture atlases, weathering, `imagegui.png` |
 | WR:SR ModelViewer | `.obj` → `.nmf`, `.mtl` authoring |
 | In-game Building / Vehicle Editor | Placement points, first-load bbox |

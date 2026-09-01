@@ -1,6 +1,6 @@
 # Blender pipeline
 
-Kosmograd meshes are made in **Blender 4.x**, exported as **Wavefront OBJ**, and converted with the game's **ModelViewer** to `.nmf`. This is the official wiki path. There is no supported FBX-into-game shortcut (the PDF mentioned FBX; the wiki says triangulate → merge by distance → OBJ → ModelViewer).
+Kosmograd meshes are made in **Blender 5.2.0 LTS** (the P0 pinned tool; 4.x sources remain compatible), exported as **Wavefront OBJ**, and converted with the game's **ModelViewer** to `.nmf`. This is the official wiki path. There is no supported FBX-into-game shortcut (the PDF mentioned FBX; the wiki says triangulate → merge by distance → OBJ → ModelViewer).
 
 Per-asset sizes, origins, and prompts live in [ASSETS.md](ASSETS.md). This file is the shared mechanical recipe.
 

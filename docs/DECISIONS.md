@@ -63,7 +63,7 @@ Corrected from the MD:
 | MD wrote | Engine actually uses |
 |---|---|
 | `$TYPE WAGON` | `$TYPE VEHICLETYPE_RAIL_VAGON` |
-| `$CARGO_TYPE VEHICLES` | `$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_VEHICLES` |
+| `$CARGO_TYPE VEHICLES` | `$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_OPEN` + `$RESOURCE_ALLOW_ONLY vehicles` (S2, copied from World Maps syntax without a DLC dependency) |
 | `$MAX_CARGO_WEIGHT 300` | `$RESOURCE_CAPACITY 300` |
 | `$RAIL_NODE` | `$CONNECTION_RAIL` |
 | `$RESOURCE_ALUMINUM` | `aluminium` (and `ecomponents`, `mcomponents`, `eletronics`) |
