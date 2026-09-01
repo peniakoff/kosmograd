@@ -98,12 +98,13 @@ Coordinates: two points `(x y z)` `(x2 y2 z2)`. **Y is up.** Y = 0 is ground for
 | `$COUNTRY 39011` | OK |
 | `$AVAILABLE y1 y2` | OK |
 | `$COST_RUB 1` | OK |
-| `$MOVEMENT_SPEED n` | OK — speed only; `$CARGOVEHICLE_MUSTBE_LOADED` defines the transport requirement |
+| `$MOVEMENT_SPEED n` | OK — speed only; the transport requirement is part of S1 |
 | `$MOVEMENT_POWER_KW n` | OK |
 | `$MOVEMENT_EMPTY_WEIGHT n` | OK (tons) |
-| `$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_VEHICLES` | OK |
+| `$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_OPEN` | COPY — vehicle-carrying wagon pattern; verify without World Maps in S2 |
+| `$RESOURCE_ALLOW_ONLY vehicles` | COPY — narrows the open hold to vehicles; syntax source is World Maps, runtime dependency is forbidden |
 | `$RESOURCE_CAPACITY n` | OK (tons or passengers) |
-| `$CARGOVEHICLE_MUSTBE_LOADED` | OK |
+| `$CARGOVEHICLE_MUSTBE_LOADED` | **UNVERIFIED** — absent from the pinned base-game definitions; S1 decides whether it works |
 | `$CARGOVEHICLE_CANBE_LOADED` | OK |
 | `$CARGOVEHICLE_VISUALIZATION min … max …` | OK |
 | `$TAKEOFF_DISTANCE n` | OK (meters) |
@@ -117,7 +118,7 @@ Coordinates: two points `(x y z)` `(x2 y2 z2)`. **Y is up.** Y = 0 is ground for
 | Draft token | Use instead |
 |---|---|
 | `$TYPE WAGON` | `$TYPE VEHICLETYPE_RAIL_VAGON` |
-| `$CARGO_TYPE VEHICLES` | `$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_VEHICLES` |
+| `$CARGO_TYPE VEHICLES` | `$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_OPEN` + `$RESOURCE_ALLOW_ONLY vehicles` (S2, UNVERIFIED) |
 | `$MAX_CARGO_WEIGHT` | `$RESOURCE_CAPACITY` |
 | `$WHEEL_BOGIE_…` | mesh naming; game infers turning wheels |
 | `$PARTICLE_MOVEMENT factory_big_gray` | building particle; not for vehicles |

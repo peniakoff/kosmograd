@@ -705,7 +705,8 @@ $MOVEMENT_SPEED 60
 $MOVEMENT_EMPTY_WEIGHT 80
 $MOVEMENT_POWER_KW 0
 
-$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_VEHICLES
+$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_OPEN
+$RESOURCE_ALLOW_ONLY vehicles
 $RESOURCE_CAPACITY 300
 
 $CARGOVEHICLE_VISUALIZATION
@@ -713,7 +714,7 @@ min -2.5 1.2 -16
 max  2.5 5.5  16
 ```
 
-The visualization block syntax must be **COPY** from a vanilla vehicle-carrying wagon (car-transport rail if any, or a flatcar that hauls vehicles). If none exists, COPY a road heavy trailer that uses `$CARGOVEHICLE_VISUALIZATION` and match field order from the vehicle guide:
+The open-hold plus `vehicles` allow-list and visualization syntax are **COPY** from World Maps `cwc/vehicles/w_ACFF7081` for knowledge only. The asset must use its own mesh/material and contain no `cwc/` or other DLC path. S2 must pass with World Maps disabled:
 
 ```text
 $CARGOVEHICLE_VISUALIZATION min x y z max x y z

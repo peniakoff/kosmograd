@@ -4,6 +4,8 @@ Format: keep a human-readable list. Breaking save changes go in **bold** at the 
 
 ## Unreleased
 
+- Added the P0A/S1–S7 experiment catalog, deterministic Blender grey-box generator, flat materials, safe Workshop WIP staging/verification harness, unit tests and evidence templates. In-game results remain explicitly `NOT RUN` pending ModelViewer conversion and private-WIP testing.
+- Corrected the candidate vehicle-wagon pattern to `RESOURCE_TRANSPORT_OPEN` plus `RESOURCE_ALLOW_ONLY vehicles`; kept `$CARGOVEHICLE_MUSTBE_LOADED` unverified until S1 and prohibited the World Maps syntax reference from becoming a DLC dependency.
 - Initial repository structure: vision, merged architecture, Sputnik P1 catalog, asset bible, Blender / Blender MCP pipeline, Workshop staging folders with annotated `building.ini` / `script.ini` templates.
 - Reframed development around a P0 feasibility gate with eight recorded engine spikes and an explicit `GO` / `PIVOT` / `STOP` decision.
 - Reduced P1 to the four-asset core; moved stage, satellite and dedicated fuel production to conditional P3 scope.

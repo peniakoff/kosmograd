@@ -17,6 +17,8 @@ jobs:
         with:
           python-version: "3.12"
       - name: Compile validator
-        run: python -m py_compile tools/validate_workshop.py
+        run: python -m py_compile tools/validate_workshop.py tools/p0_harness.py
+      - name: Test P0 harness
+        run: python -m unittest discover -s tests
       - name: Validate prototype catalog
         run: python tools/validate_workshop.py --prototype

@@ -53,7 +53,7 @@ Failure here pauses all gameplay and art work.
 | ID | Question | Pass | Failed result |
 |---|---|---|---|
 | S1 | Can `$TYPE_PRODUCTION_LINE` + `$SUBTYPE_AIRPLANE` produce an airplane flagged `$CARGOVEHICLE_MUSTBE_LOADED`? | VAB can produce Zarya-K1 | Core architecture cannot use the airplane-cargo pattern |
-| S2 | Can the produced airplane be loaded onto a `RESOURCE_TRANSPORT_VEHICLES` rail wagon at the VAB? | Erector remains a rail wagon | Test a separate, vanilla-derived vehicle loading station |
+| S2 | Can the produced airplane be loaded onto a rail wagon using `RESOURCE_TRANSPORT_OPEN` + `RESOURCE_ALLOW_ONLY vehicles`? | Erector remains a rail wagon | Test the named road-to-separate-terminal fallback |
 | S3 | Can a cargo-airplane station receive that vehicle from rail and place it on an airplane stand? | Pad remains one building | Test a proven rail terminus plus a separate airplane parking building |
 | S4 | Does a nose-up airplane with a short takeoff distance leave the pad without requiring an ordinary airport route, and what is its complete lifecycle afterward? | Visual launch is viable and repeatable | No accepted fallback yet; pivot the product promise |
 | S5 | Can pad fuel storage refuel the airplane and can one launch consume a measurable amount? | Fuel is part of the core gate | Remove fuel as a launch gate until a proven mechanism exists |
@@ -79,6 +79,8 @@ After S1–S7 choose and record exactly one outcome:
 - **STOP:** the core cargo-airplane lifecycle cannot be made reliable.
 
 Do not begin final meshes before this decision.
+
+Implementation status: the deterministic P0 fixtures, harness, tests and blank evidence records live under `experiments/p0/`, `tools/p0_harness.py` and `docs/evidence/p0/`. This is preparation, not a completed spike; all game observations remain `NOT RUN` until ModelViewer conversion and the private-WIP runs are performed.
 
 ---
 

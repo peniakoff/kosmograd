@@ -43,12 +43,15 @@ This is a plausible way to manufacture a satellite without a new resource. P3 pr
 ```text
 $TYPE VEHICLETYPE_RAIL_VAGON
 $TRAINGROUP_VAGON
-$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_VEHICLES
+$RESOURCE_TRANSPORT_TYPE RESOURCE_TRANSPORT_OPEN
+$RESOURCE_ALLOW_ONLY vehicles
 $RESOURCE_CAPACITY 300
 $CARGOVEHICLE_VISUALIZATION   ← box large enough for a 280 t, ~33 m hull
 ```
 
 Long wheelbase in the **mesh** (multiple bogies as geometry) makes tight curves look wrong and play badly. That is the gentle-curve requirement. There is no `$WHEEL_` token in the vehicle guide; bogies are model.
+
+This cargo syntax is copied from the World Maps wagon `cwc/vehicles/w_ACFF7081` as a knowledge source only. The fixture owns its mesh and materials, contains no `cwc/` reference, and must pass the final run with World Maps disabled.
 
 Couple to any vanilla diesel the player already has (TE3-class). Do not ship a locomotive in P1.
 

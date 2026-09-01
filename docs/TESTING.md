@@ -4,17 +4,17 @@ Run the relevant matrix on every private or published WIP build. P0 evidence is 
 
 ## Pinned environment
 
-Fill this before the first P0A import. A test result without these fields is provisional.
+The automated part of the P0 environment is pinned below. A test result without the remaining per-run fields is provisional.
 
 | Field | Value |
 |---|---|
-| Game version / build | `UNSET` |
-| Operating system | `UNSET` |
-| DLC enabled | `UNSET` |
+| Game version / build | Steam build `23935965` |
+| Operating system | Fedora Linux 44, kernel `7.1.10-200.fc44.x86_64` |
+| DLC enabled | World Maps installed as a syntax reference; **disabled for final P0 runs** |
 | Realistic mode / difficulty settings | `UNSET` |
 | Test-map name and revision | `UNSET` |
 | GPU / CPU / resolution for FPS checks | `UNSET` |
-| Source vanilla assets and paths | `UNSET` |
+| Source vanilla assets and paths | Recorded with SHA-256 in `docs/evidence/p0/` and `experiments/p0/manifest.json` |
 
 Whenever the pinned game build changes, rerun P0 loading plus the entire core-loop script before updating Workshop copy.
 
@@ -47,9 +47,19 @@ Back up both saves with the matching git commit or tag. If saves cannot be distr
 | Economy | Actual construction bill, cost per launch, time to first launch | P5 |
 | Compatibility | Alone first; selected popular-mod mix | P6 |
 
-## P0 spike record
+## P0 harness and spike record
 
-For each S1–S8 capture:
+Build sources with Blender `5.2.0 LTS`, convert the resulting OBJ files in ModelViewer through Proton 11, then stage only into a Steam-created private WIP:
+
+```bash
+python experiments/p0/build_assets.py
+python tools/p0_harness.py stage --spike S7 --wip /path/to/workshop_wip/ITEM --layout nested
+python tools/p0_harness.py verify --spike S7 --wip /path/to/workshop_wip/ITEM --no-dlc
+```
+
+The harness preserves Steam metadata, deletes only paths from its prior managed-state file and refuses targets outside a direct `workshop_wip` child. `workshop/` never receives P0 fixtures.
+
+For P0A and each S1–S7 capture:
 
 1. Question and expected observable result.
 2. Pinned environment and source vanilla object.
@@ -57,7 +67,7 @@ For each S1–S8 capture:
 4. Exact reproduction steps.
 5. Observed result, including what happens after save/reload.
 6. Screenshot or short capture for visual behavior.
-7. `PASS` or `FAIL` in `docs/DECISIONS.md`.
+7. `PASS` or `FAIL` in `docs/evidence/p0/` and `docs/DECISIONS.md`.
 
 Do not record `PARTIAL` as architecture approval. Split an ambiguous result into a new question.
 
